@@ -8,7 +8,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
-
+//
 
 public class MainActivity extends AppCompatActivity {
 
@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> listAdapter;
 
     //public static String[] teststring= new String[]{"quick","brown","fox","create"};
-    public static String[] value = new String[100];
+    public static String value[] = new String[100];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -25,6 +25,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.TextViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -49,12 +52,15 @@ import com.google.android.gms.common.api.CommonStatusCodes;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSource;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.CameraSourcePreview;
 import com.google.android.gms.samples.vision.ocrreader.ui.camera.GraphicOverlay;
+import com.google.android.gms.vision.Frame;
+import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextBlock;
 import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.IOException;
 import java.util.EventListener;
+import java.util.List;
 import java.util.Locale;
 import android.os.Handler;
 
@@ -74,6 +80,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     public  static String scannedwords = "";
     public  static float xCordoftap = 0;
     public  static float yCordoftap = 0;
+    public String fuck ="bad lucks";
 
 
 
@@ -105,6 +112,8 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     public TextView output;
     public Button button;
 
+    public  TextView fuckme;
+
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
@@ -117,30 +126,72 @@ public final class OcrCaptureActivity extends AppCompatActivity {
         boolean autoFocus = true;
         boolean useFlash = false;
 
+
+        fuckme = (TextView) findViewById(R.id.fuck);
         output = (TextView) findViewById(R.id.output);
         output.setSelected(true);
         button = (Button) findViewById(R.id.button);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String[] finalscanned = scannedwords.split(" ");
-                Toast.makeText(OcrCaptureActivity.this, finalscanned[0]+"OCR", Toast.LENGTH_LONG).show();
+                //Toast.makeText(OcrCaptureActivity.this, finalscanned[0]+"OCR", Toast.LENGTH_LONG).show();
 
 
-        Intent intent = new Intent(OcrCaptureActivity.this, MainActivity.class);
-                   intent.putExtra("swords", finalscanned);
+                Intent intent = new Intent(OcrCaptureActivity.this, MainActivity.class);
+                intent.putExtra("swords", finalscanned);
 
-                   startActivity(intent);
-
-
-        //                Toast.makeText(OcrCaptureActivity.this, "Your clicking of the button has been noted", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
+                // Toast.makeText(OcrCaptureActivity.this, "Your clicking of the button has been noted", Toast.LENGTH_SHORT).show();
             }
         });
 
 
 
 
+
+            //////////////////
+        Bitmap bm = BitmapFactory.decodeResource(getResources(), R.drawable.test);
+        Context context = getApplicationContext();
+
+        TextRecognizer ocrFrame = new TextRecognizer.Builder(context).build();
+        Frame frame = new Frame.Builder().setBitmap(bm).build();
+
+        if (ocrFrame.isOperational()){
+            Toast.makeText(context, "It fucking worked", Toast.LENGTH_SHORT).show();
+        }
+        SparseArray<TextBlock> textBlocks = ocrFrame.detect(frame);
+
+        for (int i = 0; i < textBlocks.size(); i++) {
+            TextBlock textBlock = textBlocks.get(textBlocks.keyAt(i));
+
+            List<? extends Text> textComponents = textBlock.getComponents();
+
+
+
+                for (Text currentLines : textComponents) {
+
+
+                    fuck = fuck +"\n"+ currentLines.getValue();
+
+                }
+
+
+
+        }
+        fuckme.setText(fuck);
+
+
+
+
+
+
+
+
+
+        ///////////////////////////////////////////
         // Check for the camera permission before accessing the camera.  If the
         // permission is not granted yet, request permission.
         int rc = ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
@@ -152,11 +203,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
 
         gestureDetector = new GestureDetector(this, new CaptureGestureListener());
         scaleGestureDetector = new ScaleGestureDetector(this, new ScaleListener());
-        /*
-        Snackbar.make(mGraphicOverlay, "Tap to Speak. Pinch/Stretch to zoom",
-                Snackbar.LENGTH_LONG)
-                .show();
-        */
+
         // TODO: Set up the Text To Speech engine.
     }
 
@@ -185,12 +232,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                         RC_HANDLE_CAMERA_PERM);
             }
         };
-        /*
-        Snackbar.make(mGraphicOverlay, R.string.permission_camera_rationale,
-                Snackbar.LENGTH_INDEFINITE)
-                .setAction(R.string.ok, listener)
-                .show();
-         */
+
     }
 
     @Override
@@ -233,7 +275,7 @@ public final class OcrCaptureActivity extends AppCompatActivity {
     private void createCameraSource(boolean autoFocus, boolean useFlash) {
         Context context = getApplicationContext();
 
-        // Create the TextRecognizer
+
         // Create the TextRecognizer
         TextRecognizer textRecognizer = new TextRecognizer.Builder(context).build();
         // TODO: Set the TextRecognizer's Processor.
@@ -261,8 +303,10 @@ public final class OcrCaptureActivity extends AppCompatActivity {
                         .setFacing(CameraSource.CAMERA_FACING_BACK)
                         .setRequestedPreviewSize(1280, 1024)
                         .setRequestedFps(15.0f)
-                        .setFlashMode(useFlash ? Camera.Parameters.FLASH_MODE_TORCH : null)
-                        .setFocusMode(autoFocus ? Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE : null)
+                        .setFlashMode(Camera.Parameters.FLASH_MODE_ON)
+                        //.setAutoFocusEnabled(true)
+
+                        /*.setFocusMode(autoFocus ? Camera.Parameters.FOCUS_MODE_AUTO: null)*/
                         .build();
     }
     /**

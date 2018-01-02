@@ -1897,7 +1897,8 @@ containing a value of this type.
         public static final int common_plus_signin_btn_text_light_normal=0x7f02007b;
         public static final int common_plus_signin_btn_text_light_pressed=0x7f02007c;
         public static final int icon=0x7f02007d;
-        public static final int notification_template_icon_bg=0x7f02007e;
+        public static final int notification_template_icon_bg=0x7f02007f;
+        public static final int test=0x7f02007e;
     }
     public static final class id {
         public static final int action0=0x7f0b0060;
@@ -1943,6 +1944,7 @@ containing a value of this type.
         public static final int end_padder=0x7f0b006c;
         public static final int expand_activities_button=0x7f0b0030;
         public static final int expanded_menu=0x7f0b0043;
+        public static final int fuck=0x7f0b0070;
         public static final int graphicOverlay=0x7f0b006f;
         public static final int home=0x7f0b0004;
         public static final int homeAsUp=0x7f0b000d;
@@ -1963,7 +1965,7 @@ containing a value of this type.
         public static final int never=0x7f0b0022;
         public static final int none=0x7f0b000e;
         public static final int normal=0x7f0b000a;
-        public static final int output=0x7f0b0070;
+        public static final int output=0x7f0b0072;
         public static final int parentPanel=0x7f0b0038;
         public static final int preview=0x7f0b006e;
         public static final int progress_circular=0x7f0b0005;

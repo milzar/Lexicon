@@ -2,5 +2,9 @@
     {
         "merged": "/home/gg/Downloads/Element/app/build/intermediates/res/merged/debug/drawable-hdpi/icon.png",
         "source": "/home/gg/Downloads/Element/app/src/main/res/drawable-hdpi/icon.png"
+    },
+    {
+        "merged": "/home/milzar/Desktop/Android Code/Projects/Element/app/build/intermediates/res/merged/debug/drawable-hdpi/icon.png",
+        "source": "/home/milzar/Desktop/Android Code/Projects/Element/app/src/main/res/drawable-hdpi/icon.png"
     }
 ]

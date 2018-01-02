@@ -551,7 +551,8 @@ int drawable common_plus_signin_btn_text_light_focused 0x7f02007a
 int drawable common_plus_signin_btn_text_light_normal 0x7f02007b
 int drawable common_plus_signin_btn_text_light_pressed 0x7f02007c
 int drawable icon 0x7f02007d
-int drawable notification_template_icon_bg 0x7f02007e
+int drawable notification_template_icon_bg 0x7f02007f
+int drawable test 0x7f02007e
 int id action0 0x7f0b0060
 int id action_bar 0x7f0b004d
 int id action_bar_activity_content 0x7f0b0000
@@ -595,6 +596,7 @@ int id end 0x7f0b001b
 int id end_padder 0x7f0b006c
 int id expand_activities_button 0x7f0b0030
 int id expanded_menu 0x7f0b0043
+int id fuck 0x7f0b0070
 int id graphicOverlay 0x7f0b006f
 int id home 0x7f0b0004
 int id homeAsUp 0x7f0b000d
@@ -615,7 +617,7 @@ int id multiply 0x7f0b0014
 int id never 0x7f0b0022
 int id none 0x7f0b000e
 int id normal 0x7f0b000a
-int id output 0x7f0b0070
+int id output 0x7f0b0072
 int id parentPanel 0x7f0b0038
 int id preview 0x7f0b006e
 int id progress_circular 0x7f0b0005
